@@ -18,7 +18,19 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
+        setupApperance()
 
+    }
+    
+    func setupApperance(){
+        setNavBarLogo()
+        
+    }
+    func setNavBarLogo(){
+        let logo = UIImage(named: "netflix")
+        let logoImageView = UIImageView(image: logo)
+        logoImageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = logoImageView
     }
 
 
@@ -40,6 +52,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        //header
+        guard let header = view as? UITableViewHeaderFooterView else {return}
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        header.textLabel?.frame = header.bounds
     }
     
     

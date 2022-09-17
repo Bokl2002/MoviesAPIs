@@ -8,11 +8,6 @@
 import UIKit
 import Alamofire
 
-// Data Base
-//var trendingMovies: [MovieModel] = []
-//var popular: [MovieModel] = []
-//var upcoming: [MovieModel] = []
-//var TopRated: [MovieModel] = []
 
 var dataBase: [DataByTitle] = [
     DataByTitle(title: "Trending Movies", data: []),
@@ -72,56 +67,9 @@ extension LaunchViewController{
 
             loadingIndicator.stopAnimating()
 
-            guard let homeVC = storyboard?.instantiateViewController(withIdentifier: "HomeNavigationController") else {return}
+            guard let homeVC = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else {return}
             present(homeVC, animated: true)
         }
     }
 
 }
-
-
-
-
-//extension LaunchViewController{
-//    func fetchAllData(){
-//        // trending movies
-//        AF.request("https://api.themoviedb.org/3/trending/movie/day?api_key=dee923fdab6a24f73be65278f17a7d46").responseDecodable(of: MoviesModel.self) { response in
-//            guard let data = response.value else {return}
-//            trendingMovies = data.results
-//            self.ifAllFinished()
-//        }
-//        //popular
-//        AF.request("https://api.themoviedb.org/3/movie/popular?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
-//            guard let data = response.value else {return}
-//            popular = data.results
-//            self.ifAllFinished()
-//        }
-//        //upcoming
-//        AF.request("https://api.themoviedb.org/3/movie/upcoming?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
-//            guard let data = response.value else {return}
-//            upcoming = data.results
-//            self.ifAllFinished()
-//        }
-//        //TopRated
-//        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
-//            guard let data = response.value else {return}
-//            TopRated = data.results
-//            self.ifAllFinished()
-//        }
-//    }
-//
-//
-//    func ifAllFinished(){
-//        if !trendingMovies.isEmpty &&
-//            !popular.isEmpty &&
-//            !upcoming.isEmpty &&
-//            !TopRated.isEmpty{
-//
-//            loadingIndicator.stopAnimating()
-//
-//            guard let homeVC = storyboard?.instantiateViewController(withIdentifier: "HomeNavigationController") else {return}
-//            present(homeVC, animated: true)
-//        }
-//    }
-//
-//}
