@@ -97,7 +97,7 @@ extension SearchViewController: UISearchBarDelegate{
             if searchText.count >= 3{
                 self.isSearching = true
                 self.filteredData = []
-                AF.request("https://api.themoviedb.org/3/search/movie?api_key=dee923fdab6a24f73be65278f17a7d46&query=\(searchText)").responseDecodable(of: MoviesModel.self) { response in
+                AF.request("\(baseURL)/search/movie?api_key=\(api_key)&query=\(searchText)").responseDecodable(of: MoviesModel.self) { response in
                     DispatchQueue.main.async {
                         guard let data = response.value else {return}
                         self.filteredData = []

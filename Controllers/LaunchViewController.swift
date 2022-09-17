@@ -33,25 +33,25 @@ class LaunchViewController: UIViewController {
 extension LaunchViewController{
     func fetchAllData(){
         // trending movies
-        AF.request("https://api.themoviedb.org/3/trending/movie/day?api_key=dee923fdab6a24f73be65278f17a7d46").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(baseURL)/trending/movie/day?api_key=\(api_key)").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[0].data = data.results
             self.ifAllFinished()
         }
         //popular
-        AF.request("https://api.themoviedb.org/3/movie/popular?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(baseURL)/movie/popular?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[1].data = data.results
             self.ifAllFinished()
         }
         //upcoming
-        AF.request("https://api.themoviedb.org/3/movie/upcoming?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(baseURL)/movie/upcoming?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[2].data = data.results
             self.ifAllFinished()
         }
         //TopRated
-        AF.request("https://api.themoviedb.org/3/movie/top_rated?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(baseURL)/movie/top_rated?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[3].data = data.results
             self.ifAllFinished()
