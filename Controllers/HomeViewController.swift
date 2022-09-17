@@ -51,7 +51,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return dataBase[section].title
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        return 15
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //header
@@ -70,8 +70,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = view.layer.frame.height * 0.25
-        return height
+        let height = 220
+        return CGFloat(height)
     }
 }
 
