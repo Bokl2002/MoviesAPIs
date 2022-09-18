@@ -8,10 +8,13 @@
 import UIKit
 import Kingfisher
 
+typealias DidSelectClosure = ((_ section: Int?, _ idx: Int?) -> Void)
+
 class MoviesRowTableViewCell: UITableViewCell {
     
-    // outlets
+    var didSelectClosure: DidSelectClosure?
     
+    // outlets
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
     override func awakeFromNib() {
@@ -23,7 +26,6 @@ class MoviesRowTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
 }
@@ -51,7 +53,7 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
             let url = "https://image.tmdb.org/t/p/w500\(path)"
             cell.movieImageView.kf.setImage(with: URL(string: url))
         }
-        
+        // cell title
         if let title = dataBase[sec].data[idx].title{
             cell.movieTitle.text = title
         }
@@ -63,7 +65,8 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
         let width = height * 0.85
         return CGSize(width: width, height: height)
     }
-    
+
+    // configur cell apperance
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
         cell.layer.cornerRadius = 10
@@ -73,6 +76,11 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
         cell.layer.shadowOffset = CGSize(width: 5, height: 5)
         cell.layer.masksToBounds = true
 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = moviesCollectionView.tag
+        didSelectClosure?(section, indexPath.row)
     }
     
 }

@@ -33,29 +33,30 @@ class LaunchViewController: UIViewController {
 extension LaunchViewController{
     func fetchAllData(){
         // trending movies
-        AF.request("\(baseURL)/trending/movie/day?api_key=\(api_key)").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(Constants.baseURL)/trending/movie/day?api_key=\(Constants.api_key)").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[0].data = data.results
             self.ifAllFinished()
         }
         //popular
-        AF.request("\(baseURL)/movie/popular?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(Constants.baseURL)/movie/popular?api_key=\(Constants.api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[1].data = data.results
             self.ifAllFinished()
         }
         //upcoming
-        AF.request("\(baseURL)/movie/upcoming?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(Constants.baseURL)/movie/upcoming?api_key=\(Constants.api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[2].data = data.results
             self.ifAllFinished()
         }
         //TopRated
-        AF.request("\(baseURL)/movie/top_rated?api_key=\(api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(Constants.baseURL)/movie/top_rated?api_key=\(Constants.api_key)&language=en-US&page=1").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             dataBase[3].data = data.results
             self.ifAllFinished()
         }
+        
     }
 
 
@@ -71,5 +72,8 @@ extension LaunchViewController{
             present(homeVC, animated: true)
         }
     }
-
+    
+    
 }
+
+

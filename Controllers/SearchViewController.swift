@@ -30,6 +30,7 @@ class SearchViewController: UIViewController {
         searchTableView.dataSource = self
         
         configureSearchController()
+        
     }
     
     func configureSearchController(){
@@ -39,7 +40,7 @@ class SearchViewController: UIViewController {
     
     // discover section
     func fetchData(){
-        AF.request("https://api.themoviedb.org/3/discover/movie?api_key=dee923fdab6a24f73be65278f17a7d46&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate").responseDecodable(of: MoviesModel.self) { response in
+        AF.request("\(Constants.baseURL)/discover/movie?api_key=\(Constants.api_key)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
             self.dataBase = data.results
             self.filteredData = self.dataBase
@@ -79,6 +80,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let VC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as! MovieDetailsViewController
+        VC.detailsData = self.filteredData[indexPath.row]
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     
@@ -94,10 +98,11 @@ extension SearchViewController: UISearchBarDelegate{
                 self.searchTableView.reloadData()
             }
         }else{
-            if searchText.count >= 3{
+            guard let text = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
+            if text.count >= 3{
                 self.isSearching = true
                 self.filteredData = []
-                AF.request("\(baseURL)/search/movie?api_key=\(api_key)&query=\(searchText)").responseDecodable(of: MoviesModel.self) { response in
+                AF.request("\(Constants.baseURL)/search/movie?api_key=\(Constants.api_key)&query=\(text)").responseDecodable(of: MoviesModel.self) { response in
                     DispatchQueue.main.async {
                         guard let data = response.value else {return}
                         self.filteredData = []

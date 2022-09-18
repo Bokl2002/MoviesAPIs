@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
         setupApperance()
+        
 
     }
     
@@ -31,6 +32,13 @@ class HomeViewController: UIViewController {
         let logoImageView = UIImageView(image: logo)
         logoImageView.contentMode = .scaleAspectFit
         navigationItem.titleView = logoImageView
+    }
+    
+    func moveToDetails(section: Int, idx: Int){
+        let VC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as! MovieDetailsViewController
+        VC.idx = idx
+        VC.section = section
+        navigationController?.pushViewController(VC, animated: true)
     }
 
 
@@ -63,9 +71,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
     
     // cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = moviesTableView.dequeueReusableCell(withIdentifier: "moviesRowCell") as! MoviesRowTableViewCell
+        let cell = moviesTableView.dequeueReusableCell(withIdentifier: "moviesRowCell", for: indexPath) as! MoviesRowTableViewCell
         
         cell.moviesCollectionView.tag = indexPath.section
+        
+        // collection view cell clicked
+        cell.didSelectClosure = { section, idx in
+            if let section = section, let idx = idx{
+                self.moveToDetails(section: section, idx: idx)
+            }
+        }
         
         return cell
     }
