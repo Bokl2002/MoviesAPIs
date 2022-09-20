@@ -11,10 +11,9 @@ import Kingfisher
 
 class SearchViewController: UIViewController {
     
-    var dataBase: [MovieModel] = []
-    
+    var searchDataBase: [MovieModel] = []
     var filteredData: [MovieModel] = []
-    var isSearching = false
+    
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -42,8 +41,8 @@ class SearchViewController: UIViewController {
     func fetchData(){
         AF.request("\(Constants.baseURL)/discover/movie?api_key=\(Constants.api_key)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate").responseDecodable(of: MoviesModel.self) { response in
             guard let data = response.value else {return}
-            self.dataBase = data.results
-            self.filteredData = self.dataBase
+            self.searchDataBase = data.results
+            self.filteredData = self.searchDataBase
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }
@@ -54,7 +53,7 @@ class SearchViewController: UIViewController {
 
 
 
-// MARK: Search Table View
+// MARK: Search Table View configuration
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredData.count
@@ -62,15 +61,14 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     
     // cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let idx = indexPath.row
         let cell = searchTableView.dequeueReusableCell(withIdentifier: "discoverCell") as! SearchTableViewCell
         // image
-        if let path = filteredData[idx].poster_path{
-            let url = "https://image.tmdb.org/t/p/w500\(path)"
-            cell.searchImageView.kf.setImage(with: URL(string: url))
-        }
-        // title
-        cell.searchTitleLabel.text = filteredData[idx].title ?? ""
+        let temp = filteredData[indexPath.row]
+        let path = temp.poster_path ?? ""
+        let url = "https://image.tmdb.org/t/p/w500\(path)"
+        cell.searchImageView.kf.setImage(with: URL(string: url))
+       // title
+        cell.searchTitleLabel.text = filteredData[indexPath.row].title
         
         return cell
     }
@@ -93,22 +91,19 @@ extension SearchViewController: UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.trimmingCharacters(in: .whitespaces).isEmpty{
             DispatchQueue.main.async {
-                self.isSearching = false
-                self.filteredData = self.dataBase
+                self.filteredData = self.searchDataBase
                 self.searchTableView.reloadData()
             }
         }else{
+            //
             guard let text = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {return}
-            if text.count >= 3{
-                self.isSearching = true
-                self.filteredData = []
+            if text.count >= 2{
+                filteredData = []
                 AF.request("\(Constants.baseURL)/search/movie?api_key=\(Constants.api_key)&query=\(text)").responseDecodable(of: MoviesModel.self) { response in
-                    DispatchQueue.main.async {
-                        guard let data = response.value else {return}
-                        self.filteredData = []
-                        self.filteredData = data.results
-                        self.searchTableView.reloadData()
-                    }
+                    guard let data = response.value else {return}
+                    self.filteredData = []
+                    self.filteredData = data.results
+                    self.searchTableView.reloadData()
                 }
             }
         }

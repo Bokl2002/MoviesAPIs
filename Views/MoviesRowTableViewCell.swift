@@ -54,9 +54,9 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
             cell.movieImageView.kf.setImage(with: URL(string: url))
         }
         // cell title
-        if let title = dataBase[sec].data[idx].title{
-            cell.movieTitle.text = title
-        }
+        let title = dataBase[sec].data[idx].title
+        cell.movieTitle.text = title
+        
 
         return cell
     }

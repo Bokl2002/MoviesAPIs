@@ -15,6 +15,9 @@ var dataBase: [DataByTitle] = [
     DataByTitle(title: "Upcoming", data: []),
     DataByTitle(title: "TopRated", data: []),
 ]
+var favouritsDataBase: [MovieModel] = []
+var isFavourit: [Int: Bool] = [:]
+
 
 
 class LaunchViewController: UIViewController {
@@ -26,6 +29,7 @@ class LaunchViewController: UIViewController {
         //size of loading indicator
         loadingIndicator.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
         fetchAllData()
+        coreData.fetchingFromCoreData()
         
     }
 }
@@ -69,7 +73,7 @@ extension LaunchViewController{
             loadingIndicator.stopAnimating()
 
             guard let homeVC = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else {return}
-            present(homeVC, animated: true)
+            present(homeVC, animated: false)
         }
     }
     

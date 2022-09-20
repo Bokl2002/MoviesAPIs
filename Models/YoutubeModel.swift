@@ -8,7 +8,6 @@
 import Foundation
 
 struct ID: Decodable{
-    var kind: String?
     var videoId: String?
 }
 

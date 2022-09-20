@@ -8,10 +8,14 @@
 import Foundation
 
 
-struct MovieModel: Decodable{
-    var title: String?
+struct MovieModel: Decodable, Equatable, Hashable{
+    var title: String
     var poster_path: String?
     var overview: String?
+    var id: Int
+}
+func ==(lhs: MovieModel, rhs: MovieModel) -> Bool{
+    return lhs.title == rhs.title
 }
 
 struct MoviesModel: Decodable{

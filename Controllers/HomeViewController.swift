@@ -20,7 +20,6 @@ class HomeViewController: UIViewController {
         moviesTableView.dataSource = self
         setupApperance()
         
-
     }
     
     func setupApperance(){
@@ -36,8 +35,7 @@ class HomeViewController: UIViewController {
     
     func moveToDetails(section: Int, idx: Int){
         let VC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as! MovieDetailsViewController
-        VC.idx = idx
-        VC.section = section
+        VC.detailsData = dataBase[section].data[idx]
         navigationController?.pushViewController(VC, animated: true)
     }
 
