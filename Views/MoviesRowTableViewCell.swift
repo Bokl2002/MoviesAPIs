@@ -70,9 +70,8 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
         cell.layer.cornerRadius = 10
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowOpacity = 0.4
-        cell.layer.shadowRadius = 7
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOpacity = 0.3
         cell.layer.shadowOffset = CGSize(width: 5, height: 5)
         cell.layer.masksToBounds = true
 

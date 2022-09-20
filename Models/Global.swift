@@ -7,6 +7,17 @@
 
 import Foundation
 
+// data base
+var dataBase: [DataByTitle] = [
+    DataByTitle(title: "Trending Movies", data: []),
+    DataByTitle(title: "Popular", data: []),
+    DataByTitle(title: "Upcoming", data: []),
+    DataByTitle(title: "TopRated", data: []),
+]
+var favouritsDataBase: [MovieModel] = []
+var isFavourit: [Int: Bool] = [:]
+
+
 
 struct Constants{
     static let api_key = "dee923fdab6a24f73be65278f17a7d46"

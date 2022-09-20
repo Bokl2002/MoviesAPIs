@@ -24,7 +24,6 @@ class HomeViewController: UIViewController {
     
     func setupApperance(){
         setNavBarLogo()
-        
     }
     func setNavBarLogo(){
         let logo = UIImage(named: "netflix")
@@ -32,6 +31,8 @@ class HomeViewController: UIViewController {
         logoImageView.contentMode = .scaleAspectFit
         navigationItem.titleView = logoImageView
     }
+    
+    
     
     func moveToDetails(section: Int, idx: Int){
         let VC = storyboard?.instantiateViewController(withIdentifier: "MovieDetailsVC") as! MovieDetailsViewController

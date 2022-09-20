@@ -10,7 +10,6 @@ import Kingfisher
 
 class FavouritMoviesViewController: UIViewController {
 
-    
     @IBOutlet weak var favouritListTableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,6 +17,7 @@ class FavouritMoviesViewController: UIViewController {
         favouritListTableView.delegate = self
         favouritListTableView.dataSource = self        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         favouritListTableView.reloadData()
     }
@@ -28,9 +28,13 @@ class FavouritMoviesViewController: UIViewController {
 
 
 extension FavouritMoviesViewController: UITableViewDelegate, UITableViewDataSource{
+    
+    // sections
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         favouritsDataBase.count
     }
+    
+    // cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let idx = indexPath.row
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavouritMoviecell", for: indexPath) as! FavouritMoviecellTableViewCell
@@ -53,4 +57,5 @@ extension FavouritMoviesViewController: UITableViewDelegate, UITableViewDataSour
         VC.detailsData = favouritsDataBase[indexPath.row]
         navigationController?.pushViewController(VC, animated: true)
     }
+    
 }

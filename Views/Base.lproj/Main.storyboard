@@ -10,23 +10,32 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Launch View Controller-->
+        <!--Loading View Controller-->
         <scene sceneID="fPC-kd-4lz">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="bL2-Px-ykE" customClass="LaunchViewController" customModule="MoviesAPIs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bL2-Px-ykE" customClass="LoadingViewController" customModule="MoviesAPIs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wrg-8L-Yt3">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="netflix" translatesAutoresizingMaskIntoConstraints="NO" id="jMx-ww-Hid">
+                                <rect key="frame" x="45" y="327" width="300" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="WUU-Lg-Zz5"/>
+                                    <constraint firstAttribute="width" constant="300" id="pBJ-IB-ZVJ"/>
+                                </constraints>
+                            </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Jfn-wn-dwL">
-                                <rect key="frame" x="185" y="417" width="20" height="20"/>
+                                <rect key="frame" x="185" y="477" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WH0-dw-Nif"/>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Jfn-wn-dwL" firstAttribute="centerX" secondItem="WH0-dw-Nif" secondAttribute="centerX" id="Cwi-hk-LAo"/>
-                            <constraint firstItem="Jfn-wn-dwL" firstAttribute="centerY" secondItem="WH0-dw-Nif" secondAttribute="centerY" id="msh-RT-TzX"/>
+                            <constraint firstItem="jMx-ww-Hid" firstAttribute="centerX" secondItem="WH0-dw-Nif" secondAttribute="centerX" id="3PC-c3-RfX"/>
+                            <constraint firstItem="jMx-ww-Hid" firstAttribute="centerY" secondItem="WH0-dw-Nif" secondAttribute="centerY" id="Qpk-2K-LwH"/>
+                            <constraint firstItem="Jfn-wn-dwL" firstAttribute="centerX" secondItem="jMx-ww-Hid" secondAttribute="centerX" id="RFE-7P-5RW"/>
+                            <constraint firstItem="Jfn-wn-dwL" firstAttribute="top" secondItem="jMx-ww-Hid" secondAttribute="bottom" constant="-50" id="tSi-Zg-ADL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JCl-Lz-9sN"/>
@@ -202,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3km-SF-3xM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="1388"/>
+            <point key="canvasLocation" x="2833.8461538461538" y="1387.6777251184833"/>
         </scene>
         <!--Home-->
         <scene sceneID="qVp-41-uEO">
@@ -345,24 +354,6 @@
             </objects>
             <point key="canvasLocation" x="976.92307692307691" y="697.39336492890993"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Bsi-nP-wEA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wkj-1y-5Su" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Wyc-w4-qHo">
-                        <rect key="frame" x="0.0" y="44" width="390" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dIf-C3-lPn" kind="relationship" relationship="rootViewController" id="wFr-xE-ElE"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OSO-Mu-lx6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="977" y="1388"/>
-        </scene>
         <!--Favourit Movies View Controller-->
         <scene sceneID="PBR-Gy-k2y">
             <objects>
@@ -450,19 +441,35 @@
             </objects>
             <point key="canvasLocation" x="197" y="-717"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6qO-vn-fco">
+            <objects>
+                <navigationController storyboardIdentifier="Browser" automaticallyAdjustsScrollViewInsets="NO" id="PUP-GQ-oTU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xpG-fw-ayU">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dIf-C3-lPn" kind="relationship" relationship="rootViewController" id="Mas-X4-v1S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LaI-EI-Lg8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1904.6153846153845" y="1387.6777251184833"/>
+        </scene>
     </scenes>
     <resources>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="netflix" width="1000" height="471"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

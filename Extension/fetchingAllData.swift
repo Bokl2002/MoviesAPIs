@@ -1,40 +1,14 @@
 //
-//  LaunchViewController.swift
+//  Extensions.swift
 //  MoviesAPIs
 //
-//  Created by Abdullah Elbokl on 16/09/2022.
+//  Created by Abdullah Elbokl on 20/09/2022.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
-
-var dataBase: [DataByTitle] = [
-    DataByTitle(title: "Trending Movies", data: []),
-    DataByTitle(title: "Popular", data: []),
-    DataByTitle(title: "Upcoming", data: []),
-    DataByTitle(title: "TopRated", data: []),
-]
-var favouritsDataBase: [MovieModel] = []
-var isFavourit: [Int: Bool] = [:]
-
-
-
-class LaunchViewController: UIViewController {
-    
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //size of loading indicator
-        loadingIndicator.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
-        fetchAllData()
-        coreData.fetchingFromCoreData()
-        
-    }
-}
-
-extension LaunchViewController{
+extension LoadingViewController{
     func fetchAllData(){
         // trending movies
         AF.request("\(Constants.baseURL)/trending/movie/day?api_key=\(Constants.api_key)").responseDecodable(of: MoviesModel.self) { response in
@@ -64,14 +38,16 @@ extension LaunchViewController{
     }
 
 
+    
     func ifAllFinished(){
+
         if !dataBase[0].data.isEmpty &&
             !dataBase[1].data.isEmpty &&
             !dataBase[2].data.isEmpty &&
             !dataBase[3].data.isEmpty{
-
+            
             loadingIndicator.stopAnimating()
-
+            
             guard let homeVC = storyboard?.instantiateViewController(withIdentifier: "tabBarController") else {return}
             present(homeVC, animated: false)
         }
@@ -79,5 +55,3 @@ extension LaunchViewController{
     
     
 }
-
-

@@ -59,6 +59,7 @@ class MovieDetailsViewController: UIViewController, WKNavigationDelegate {
 
     @IBAction func favouritBTN(_ sender: Any) {
         
+        
         if isFavourit[detailsData.id] != true{
             // add to favourit
             favouritBTN.image = UIImage(systemName: "heart.fill")
