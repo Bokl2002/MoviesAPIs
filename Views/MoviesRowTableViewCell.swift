@@ -53,6 +53,8 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
             let url = "https://image.tmdb.org/t/p/w500\(path)"
             cell.movieImageView.kf.setImage(with: URL(string: url))
         }
+        cell.movieImageView.layer.cornerRadius = 20
+
         // cell title
         let title = dataBase[sec].data[idx].title
         cell.movieTitle.text = title
@@ -62,19 +64,14 @@ extension MoviesRowTableViewCell: UICollectionViewDelegate, UICollectionViewDele
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = moviesCollectionView.layer.frame.height
-        let width = height * 0.85
+        let width = height * 0.75
         return CGSize(width: width, height: height)
     }
 
     // configur cell apperance
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
-        cell.layer.cornerRadius = 10
-        cell.layer.shadowColor = UIColor.black.cgColor
-        cell.layer.shadowOpacity = 0.3
-        cell.layer.shadowOffset = CGSize(width: 5, height: 5)
+        cell.layer.cornerRadius = 20
         cell.layer.masksToBounds = true
-
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

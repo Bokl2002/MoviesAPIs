@@ -14,7 +14,7 @@ class MovieDetailsViewController: UIViewController, WKNavigationDelegate {
     
     // global variables
     var detailsData: MovieModel!
-
+    
     // outlets
     @IBOutlet weak var youtubeWebView: WKWebView!
     @IBOutlet weak var movieOverViewTextView: UITextView!
@@ -23,27 +23,27 @@ class MovieDetailsViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         showDetails()
-
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         someConfigurations()
     }
-
+    
     func showDetails(){
         // title
         self.title = detailsData.title
         
         // overview
         movieOverViewTextView.text = detailsData.overview
-////        web View
-//        let title = "\(detailsData.title) trailer".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-//        AF.request("\(Constants.youtube_baseURL)q=\(title)&key=\(Constants.youtube_key)").responseDecodable(of: YsModels.self) { response in
-//            guard let data = response.value?.items else {return}
-//            guard let videoID = data.first?.id.videoId else {return}
-//            
-//            guard let url = URL(string: "https://www.youtube.com/embed/\(videoID)") else {return}
-//            self.youtubeWebView.load(URLRequest(url: url))
-//        }
+        //        web View
+        let title = "\(detailsData.title) trailer".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        AF.request("\(Constants.youtube_baseURL)q=\(title)&key=\(Constants.youtube_key)").responseDecodable(of: YsModels.self) { response in
+            guard let data = response.value?.items else {return}
+            guard let videoID = data.first?.id.videoId else {return}
+            
+            guard let url = URL(string: "https://www.youtube.com/embed/\(videoID)") else {return}
+            self.youtubeWebView.load(URLRequest(url: url))
+        }
     }
     
     func someConfigurations(){
@@ -56,7 +56,7 @@ class MovieDetailsViewController: UIViewController, WKNavigationDelegate {
         }
     }
     
-
+    
     @IBAction func favouritBTN(_ sender: Any) {
         
         

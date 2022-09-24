@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .systemBackground
+
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
         setupApperance()
@@ -58,7 +60,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return dataBase[section].title
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 15
+        return 12
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         //header
@@ -84,7 +86,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = 220
+        let height = 250
         return CGFloat(height)
     }
 }
